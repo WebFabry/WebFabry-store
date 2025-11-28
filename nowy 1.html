@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Opisz i kup swoją stronę</title>
+<link rel="icon" href="logo.png" type="image/png">
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, black, purple);
+    color: white;
+    transition: all 0.5s ease;
+}
+h1 {
+    font-size: 36px;
+    color: red;
+    text-align: center;
+    margin-top: 20px;
+    text-shadow: 2px 2px 5px black;
+}
+h2 {
+    font-size: 25px;
+    color: blue;
+    text-align: center;
+    margin: 10px 0;
+    text-shadow: 1px 1px 3px black;
+}
+p, li {
+    font-size: 18px;
+    line-height: 1.5;
+}
+span {
+    font-size: 27px;
+    font-weight: bold;
+}
+#regulamin {
+    font-size: 16px;
+    color: white;
+    max-width: 750px;
+    margin: 30px auto;
+    padding: 25px;
+    background: rgba(0,0,0,0.5);
+    border: 3px solid #6a0dad;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.8);
+    text-align: left;
+}
+#regulamin p { margin-bottom: 12px; }
+img {
+    display: block;
+    max-width: 90%;
+    margin: 20px auto;
+    border: 3px solid white;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.7);
+    transition: transform 0.3s ease;
+}
+img:hover { transform: scale(1.05) rotate(1deg); }
+footer {
+    text-align: center;
+    padding: 20px;
+    background: rgba(0,0,0,0.6);
+    font-size: 16px;
+    border-top: 2px solid #6a0dad;
+    box-shadow: 0 -3px 10px rgba(0,0,0,0.5);
+}
+#toggleTheme {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    background: #fff;
+    color: #333;
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: 2px solid #6a0dad;
+    cursor: pointer;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+#toggleTheme:hover { background: #f0f0f0; }
+.light-theme {
+    background: linear-gradient(to right, #fffa9c, #a0d8f5);
+    color: #333;
+}
+.light-theme h1 { color: #ff4500; }
+.light-theme h2 { color: #0055aa; }
+.light-theme #regulamin {
+    background: rgba(255,255,255,0.7);
+    color: #333;
+    border: 3px solid #ff9900;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+.light-theme img {
+    border: 3px solid #333;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+/* Social Media Box */
+#socialBox {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+}
+#socialBox .social {
+    position: relative;
+    display: block;
+    width: 50px;
+    height: 50px;
+    background: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 50px;
+    color: #333;
+    font-size: 24px;
+    text-decoration: none;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+    transition: transform 0.3s, background 0.3s, color 0.3s;
+}
+#socialBox .social:hover {
+    transform: scale(1.2);
+    background: #6a0dad;
+    color: white;
+}
+#socialBox .social::after {
+    content: attr(data-name);
+    position: absolute;
+    right: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s;
+}
+#socialBox .social:hover::after { opacity: 1; right: 70px; }
+
+/* Logo hover tooltip */
+#logo { 
+    border: 5px solid black;
+    max-width:200px;
+    border-radius:12px;
+    box-shadow:0 0 15px rgba(0,0,0,0.7);
+    transition: transform 0.3s ease;
+    display:block;
+    margin:20px auto;
+    position: relative;
+}
+#logo:hover { transform: scale(1.05) rotate(1deg); }
+#logo::after {
+    content: "Logo WebFabry";
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+#logo:hover::after { opacity: 1; }
+
+/* Popup fade */
+.popup {
+    display:none;
+    opacity:0;
+    transition: opacity 0.3s ease;
+}
+
+/* Responsive */
+@media(max-width:600px){
+    #toggleTheme { font-size:14px; padding:8px 12px; }
+    #contactInfoBtn, #orderBtn { font-size:16px; padding:12px 16px; bottom:10px; }
+    #socialBox { bottom:10px; right:10px; gap:8px; }
+    #socialBox .social { width:40px; height:40px; line-height:40px; font-size:20px; }
+}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<button id="toggleTheme">Jasne Tło</button>
+
+<h1>Opisz i kup swoją stronę</h1>
+<h2>To strona, na której możesz opisać wygląd strony, którą chciałbyś mieć,</h2>
+<h2>a ja postaram się ją wykonać za drobną opłatą.</h2>
+<h2>Poniżej znajdziesz <span>regulamin:</span></h2>
+
+<div id="regulamin">
+<p>1. Strona nie może zawierać treści nazistowskich, faszystowskich ani innych tego typu, chyba że są one przedstawione wyłącznie w celu historycznym.</p>
+<p>2. Nie przyjmuję opisów stron, które są kopią istniejących witryn bez zgody ich autorów.</p>
+<p>3. Zakaz spamu i niechcianych reklam.</p>
+<p>4. Strona podlega prawom autorskim. Wszelkie próby sprzedaży projektu lub kodu bez mojej zgody będą zgłaszane do odpowiednich instytucji.</p>
+<p>5. Zakazuje się m.in. sprzedawania kodu dalej, usuwania informacji o autorze, w tym linku do tej strony, który powinien znajdować się w prawym dolnym rogu.</p>
+<p>6. Po zakupie klient może poprosić o maksymalnie 5 poprawek. Każda poprawka może obejmować drobne zmiany wyglądu lub dodanie elementów typu eventy.</p>
+<p>7. Nie odpowiadam za nielegalne pliki lub treści, które klient doda po wykonaniu i przekazaniu strony.</p>
+<p>8. Projekt uznaje się za zakończony po 48 godzinach od momentu, gdy klient potwierdzi, że nic więcej nie potrzebuje.</p>
+<p>9. Przed rozpoczęciem projektu podpisywana jest e-umowa z podaną ceną. Cena może mieć zakres, np. 100–200 zł.</p>
+<p>10. Czas realizacji określany jest w umowie.</p>
+<p>11. Płatność przelewem lub Blikiem.</p>
+<p>12. Nie przyjmuję treści pornograficznych ani wysoce obraźliwych.</p>
+<p>13. Projekt strony nie obejmuje hostingu ani domeny – klient odpowiada za wykupienie tych usług.</p>
+<p>14. Wszelkie dodatkowe funkcje lub skrypty wymagają osobnej wyceny.</p>
+<p>15. Klient powinien dostarczyć wszystkie materiały (zdjęcia, teksty) przed rozpoczęciem projektu.</p>
+</div>
+
+<h2>Przykładowe wzory umów:</h2>
+<!-- Obrazki -->
+<img src="1.jpg" alt="Wzór umowy" class="zoomable">
+<img src="2.jpg" alt="Wzór umowy 2" class="zoomable">
+<img id="logo" src="logo.jpg" alt="Logo strony" class="zoomable">
+
+<!-- Lightbox -->
+<div id="lightbox" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);justify-content:center;align-items:center;z-index:10000;">
+    <img id="lightbox-img" src="" style="max-width:90%;max-height:90%;border-radius:12px;box-shadow:0 0 25px rgba(0,0,0,0.8);">
+</div>
+
+<script>
+// Lightbox
+const zoomables = document.querySelectorAll('.zoomable');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+
+zoomables.forEach(img => {
+    img.addEventListener('click', () => {
+        lightbox.style.display = 'flex';
+        lightboxImg.src = img.src;
+    });
+});
+
+lightbox.addEventListener('click', () => {
+    lightbox.style.display = 'none';
+});
+</script>
+
+
+<footer>
+<p>© 2025 Opisz i kup swoją stronę. Wszelkie prawa zastrzeżone.</p>
+</footer>
+
+<!-- Social Media Box -->
+<div id="socialBox">
+    <a href="https://www.tiktok.com/@webfabry" target="_blank" class="social" data-name="@WebFabry"><i class="fab fa-tiktok"></i></a>
+    <a href="https://www.facebook.com/WebFabry" target="_blank" class="social" data-name="@WebFabry"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://www.instagram.com/webfabry" target="_blank" class="social" data-name="@WebFabry"><i class="fab fa-instagram"></i></a>
+    <a href="https://www.youtube.com/@webfabry" target="_blank" class="social" data-name="@WebFabry"><i class="fab fa-youtube"></i></a>
+</div>
+
+<!-- Buttons -->
+<button id="contactInfoBtn" style="position:fixed;bottom:60px;left:20px;padding:15px 20px;font-size:18px;background:#6a0dad;color:white;border:none;border-radius:10px;cursor:pointer;box-shadow:2px 2px 10px rgba(0,0,0,0.5);">Namiary kontaktowe</button>
+
+<div id="contactInfoPopup" class="popup" style="position:fixed;bottom:110px;left:20px;width:300px;padding:20px;background:#fff;color:#333;border-radius:12px;box-shadow:0 0 25px rgba(0,0,0,0.5);z-index:10000;">
+    <p>Skontaktuj się: <strong>WebFabry@gmail.com</strong></p>
+    <p>W mailu podaj:</p>
+    <ul>
+        <li>Imię i nazwisko</li>
+        <li>Opis strony, którą chcesz zamówić</li>
+    </ul>
+</div>
+
+<script>
+const toggleBtn = document.getElementById('toggleTheme');
+toggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('light-theme');
+    toggleBtn.textContent = document.body.classList.contains('light-theme') ? 'Ciemne Tło' : 'Jasne Tło';
+});
+
+const contactBtn = document.getElementById('contactInfoBtn');
+const contactPopup = document.getElementById('contactInfoPopup');
+contactBtn.addEventListener('click', () => {
+    if(contactPopup.style.display === 'block') {
+        contactPopup.style.opacity = 0;
+        setTimeout(()=>contactPopup.style.display='none',300);
+    } else {
+        contactPopup.style.display='block';
+        setTimeout(()=>contactPopup.style.opacity=1,10);
+    }
+});
+</script>
+
+</body>
+</html>
